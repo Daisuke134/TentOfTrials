@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-06-18T07:41:51.223898+00:00",
+  "commit": "4df9f290",
+  "diagnostic_logd": [
+    "diagnostic/build-4df9f290-part001.logd",
+    "diagnostic/build-4df9f290-part002.logd",
+    "diagnostic/build-4df9f290-part003.logd",
+    "diagnostic/build-4df9f290-part004.logd",
+    "diagnostic/build-4df9f290-part005.logd"
+  ],
+  "diagnostic_logd_error": null,
+  "message_blocker": null,
+  "chunked": true,
+  "chunk_size_bytes": 41943040,
+  "password": "b6a1a3115c6d9e083002",
+  "decrypt_command": "encryptly unpack diagnostic/build-4df9f290.logd <outdir> --password b6a1a3115c6d9e083002",
+  "total_modules": 1,
+  "passed": 1,
+  "failed": 0,
+  "modules": [
+    {
+      "name": "market",
+      "status": "PASS",
+      "elapsed_seconds": 0.702,
+      "artifact": "/private/tmp/tent-bounty-1781768365/TentOfTrials/market/market",
+      "output": ""
+    }
+  ],
+  "pr_note": "Include the encrypted diagnostic logd artifact(s): diagnostic/build-4df9f290-part001.logd, diagnostic/build-4df9f290-part002.logd, diagnostic/build-4df9f290-part003.logd, diagnostic/build-4df9f290-part004.logd, diagnostic/build-4df9f290-part005.logd. The encrypted .logd is the required diagnostic content for PR review; this JSON file is metadata. Maintainers may ask you to remove these diagnostic artifacts before merging."
+}
