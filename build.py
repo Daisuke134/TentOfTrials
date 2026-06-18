@@ -201,6 +201,19 @@ MODULES = [
     ),
 ]
 
+def parse_module_names(raw: str) -> list[str]:
+    """Parse comma-separated module names with optional surrounding spaces."""
+    return [n.strip() for n in raw.split(",") if n.strip()]
+
+
+def resolve_modules(names: list[str], modules: list[Module]) -> tuple[list[Module], set[str]]:
+    """Resolve a list of module names to Module objects. Returns (matched, not_found)."""
+    name_set = {m.name for m in modules}
+    matched = [m for m in modules if m.name in names]
+    not_found = set(names) - name_set
+    return matched, not_found
+
+
 ENCRYPTLY_DIR = ROOT / "tools" / "encryptly"
 ENCRYPTLY_BINARIES = {
     "linux-x64": ENCRYPTLY_DIR / "linux-x64" / "encryptly",
@@ -850,7 +863,7 @@ Diagnostic bundle:
         help="Show detailed build output",
     )
     parser.add_argument(
-        "--list", action="store_true",
+        "--list", "--list-modules", action="store_true",
         help="List available modules and exit",
     )
 
@@ -882,11 +895,10 @@ Diagnostic bundle:
     if args.module == "all":
         selected = MODULES
     else:
-        names = [n.strip() for n in args.module.split(",")]
-        selected = [m for m in MODULES if m.name in names]
-        not_found = set(names) - {m.name for m in MODULES}
+        names = parse_module_names(args.module)
+        selected, not_found = resolve_modules(names, MODULES)
         if not_found:
-            print(f"  {color('✗ Unknown modules:', Colors.RED)} {', '.join(not_found)}")
+            print(f"  {color('✗ Unknown modules:', Colors.RED)} {', '.join(sorted(not_found))}")
             print(f"    Available: {', '.join(m.name for m in MODULES)}")
             return 1
 
