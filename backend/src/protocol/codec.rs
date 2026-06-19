@@ -1,4 +1,5 @@
 // Wire format encoding and decoding for the Tent of Trials protocol.
+// LEGACY: audit marker for issue #61.
 //
 // This module implements the binary encoding and decoding of protocol messages
 // for transmission over network connections. It supports multiple encoding

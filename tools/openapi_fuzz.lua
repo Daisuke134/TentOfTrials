@@ -1,6 +1,7 @@
 -- =============================================================================
 -- openapi_fuzz.lua  -  OpenAPI-based API Fuzzer
 -- =============================================================================
+-- LEGACY: audit marker for issue #61.
 --
 -- "If you are not fuzzing your API, you are not testing it.
 --  You are just hoping. Hope is not a strategy. Fuzzing is."

@@ -1,4 +1,5 @@
 // Connector module - bridges the Rust backend with the C frailbox runtime.
+// LEGACY: audit marker for issue #61.
 //
 // This module provides the FFI bridge, type conversions, and high-level
 // abstractions for communicating with the C-based connector library that

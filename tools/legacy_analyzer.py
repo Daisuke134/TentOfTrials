@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# LEGACY: audit marker for issue #61.
 """
 Legacy system analyzer and dependency tracker.
 

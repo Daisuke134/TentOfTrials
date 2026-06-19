@@ -1,4 +1,5 @@
 // Protocol module for the Tent of Trials messaging system.
+// LEGACY: audit marker for issue #61.
 //
 // This module defines all message types, event schemas, and serialization
 // formats used for communication between services. It includes both the

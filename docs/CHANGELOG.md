@@ -1,4 +1,5 @@
 # Changelog
+<!-- LEGACY: audit marker for issue #61. -->
 
 > WARNING: This changelog is auto-generated from git commit messages and may
 > contain inaccuracies. The commit messages are written by developers and are

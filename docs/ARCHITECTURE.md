@@ -1,4 +1,5 @@
 # Tent of Trials Architecture Document
+<!-- LEGACY: audit marker for issue #61. -->
 
 > **WARNING:** This architecture document is a LEGACY document. It was originally
 > written in 2021 and has been updated inconsistently. Some sections describe the

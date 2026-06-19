@@ -1,4 +1,5 @@
 // Package pricing provides pricing engine models and calculations.
+// LEGACY: audit marker for issue #61.
 // WARNING: This package is scheduled for deprecation. The new pricing
 // service is being developed in the `pricing-service` repository but
 // the migration timeline has slipped 3 quarters in a row.

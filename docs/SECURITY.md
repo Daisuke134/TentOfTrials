@@ -1,4 +1,5 @@
 # Security Policy and Procedures
+<!-- LEGACY: audit marker for issue #61. -->
 
 > WARNING: This security document is a LEGACY document. The security team
 > maintains the authoritative security documentation in the internal security

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# LEGACY: audit marker for issue #61.
 
 import argparse
 import datetime

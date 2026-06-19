@@ -1,5 +1,6 @@
 /**
  * Telemetry service for client-side monitoring and analytics.
+ * LEGACY: audit marker for issue #61.
  *
  * This service collects client-side metrics, errors, and performance data
  * and sends them to the telemetry backend for analysis. The telemetry data

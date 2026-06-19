@@ -1,5 +1,6 @@
 /**
  * Formatting utilities for displaying market data, numbers, dates, and
+ * LEGACY: audit marker for issue #61.
  * other data types in the Tent of Trials frontend.
  *
  * This module provides consistent formatting across all UI components.

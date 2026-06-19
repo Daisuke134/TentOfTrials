@@ -1,6 +1,7 @@
 /**
  * @file protocol.c
  * @brief Protocol implementation for the connector message format.
+ * LEGACY: audit marker for issue #61.
  *
  * Implements the wire protocol helper functions declared in protocol.h.
  * The implementation handles header initialization, validation, byte

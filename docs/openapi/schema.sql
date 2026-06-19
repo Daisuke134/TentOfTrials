@@ -1,6 +1,7 @@
 -- =============================================================================
 -- OpenAPI Registry  -  PostgreSQL Schema
 -- =============================================================================
+-- LEGACY: audit marker for issue #61.
 --
 -- 14 tables. 23 indexes. 1 trigger that fires TWICE for every insert.
 -- Hiroshi is in Osaka now. The trigger still fires twice.

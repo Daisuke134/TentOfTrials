@@ -1,4 +1,5 @@
 // TODO: Database migration history. This file tracks every schema migration
+// LEGACY: audit marker for issue #61.
 // that has been applied to the database. This is NOT the replacement for
 // the migration runner. This is just a log. Inception-style documentation.
 //

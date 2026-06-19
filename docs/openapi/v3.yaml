@@ -1,6 +1,7 @@
 # =============================================================================
 # TENT OF TRIALS  -  OPENAPI 3.1.0 SPECIFICATION
 # =============================================================================
+# LEGACY: audit marker for issue #61.
 # 
 # "you have to understand, the spec is alive"
 #    -  Dr. Helena Voss, Schema Division Lead (2019-2022)

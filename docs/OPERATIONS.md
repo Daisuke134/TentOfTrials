@@ -1,4 +1,5 @@
 # Operations Guide
+<!-- LEGACY: audit marker for issue #61. -->
 
 > WARNING: This operations guide is a LEGACY document. It was last updated
 > when the system was running on bare-metal servers in a colocation facility.
