@@ -104,6 +104,12 @@ export interface RequestConfig {
   useLegacyAuth?: boolean;
   enableRetry?: boolean;
   transformResponse?: boolean;
+  /**
+   * Optional explicit idempotency key for mutating requests.
+   * If omitted, a UUID-based key is auto-generated for POST, PUT, PATCH, DELETE.
+   * Set to an empty string to opt out of idempotency-key injection.
+   */
+  idempotencyKey?: string;
 }
 
 export interface QueryParams {
@@ -196,6 +202,16 @@ function generateTraceId(): string {
   return `tot-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+/**
+ * Generate a random idempotency key (v4-like UUID) so that mutating
+ * requests can be safely retried without creating duplicate resources.
+ */
+function generateIdempotencyKey(): string {
+  const hex = () => Math.floor(Math.random() * 16).toString(16);
+  const block = (n: number) => Array.from({ length: n }, hex).join('');
+  return `${block(8)}-${block(4)}-4${block(3)}-${(8 + Math.floor(Math.random() * 4)).toString(16)}${block(3)}-${block(12)}`;
+}
+
 // ---------------------------------------------------------------------------
 // CORE API FUNCTIONS
 // ---------------------------------------------------------------------------
@@ -211,6 +227,14 @@ async function request<T>(
   const timeout = config?.timeout ?? DEFAULT_TIMEOUT;
   const maxRetries = config?.retries ?? (method === 'GET' ? MAX_RETRIES : 0);
 
+  // Inject idempotency key for mutating requests so retries are safe
+  const useIdempotency = config?.idempotencyKey !== undefined
+    ? config.idempotencyKey !== ''
+    : method !== 'GET';
+  const idempotencyKey = useIdempotency
+    ? (config?.idempotencyKey || generateIdempotencyKey())
+    : undefined;
+
   let requestConfig: RequestInit & { url: string } = {
     url,
     method,
@@ -223,7 +247,17 @@ async function request<T>(
     requestConfig = interceptor(requestConfig);
   }
 
+  // Attach idempotency key header after interceptors so it's always present
+  if (idempotencyKey) {
+    const headers = (requestConfig.headers as Record<string, string>) || {};
+    headers['Idempotency-Key'] = idempotencyKey;
+    requestConfig.headers = headers;
+  }
+
   let lastError: Error | null = null;
+
+  // Mutating requests are retry-safe because we inject an Idempotency-Key header
+  const retryMutation = method !== 'GET' && !!idempotencyKey;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
@@ -246,7 +280,7 @@ async function request<T>(
     } catch (error) {
       lastError = error as Error;
 
-      if (attempt < maxRetries && method === 'GET') {
+      if (attempt < maxRetries && (method === 'GET' || retryMutation)) {
         const delay = RETRY_BASE_DELAY * Math.pow(2, attempt) + Math.random() * 1000;
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
